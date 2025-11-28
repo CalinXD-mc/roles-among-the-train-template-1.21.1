@@ -5,7 +5,8 @@
 	"name": "Roles Among the Train",
 	"description": "Roles Among the Train is a \"The Last Voyage of the Harpy Express\" addon that adds a few new roles.",
 	"authors": [
-		"CalinXD!"
+		"CalinXD!",
+        "agmas (Creator of the HarpyModLoader)"
 	],
 	"contact": {
 		"homepage": "https://modrinth.com/roles-among-the-train",

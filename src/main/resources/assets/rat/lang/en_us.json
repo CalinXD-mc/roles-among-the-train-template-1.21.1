@@ -11,14 +11,6 @@
   "announcement.role.apathetic": "Apathetic",
   "announcement.win.apathetic": "Passagers Win!",
 
-  "announcement.goals.host": "Use the master key to open up any door on the train!",
-  "announcement.role.host": "Host",
-  "announcement.win.host": "Passengers Win!",
-
-  "announcement.goals.shapeshifter": "Fool everyone by disguising yourself.",
-  "announcement.role.shapeshifter": "Shapeshifter",
-  "announcement.win.shapeshifter": "Killers Win!",
-
   "announcement.goals.toxicologist": "You can tell if something is Poisoned.",
   "announcement.role.toxicologist": "Toxicologist",
   "announcement.win.toxicologist": "Passagers Win!",
