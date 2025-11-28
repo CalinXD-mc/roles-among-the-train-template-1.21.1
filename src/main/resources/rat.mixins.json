@@ -1,0 +1,23 @@
+{
+	"required": true,
+	"package": "dev.cxd.rat.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+      "CheckModdedWeightsMixin",
+      "GameFunctionsMixin",
+      "VannilaStartMixin",
+      "ForceRoleCommandMixin"
+    ],
+    "client": [
+      "client.InstinctMixin",
+      "client.InnocenceReliantWinTextMixin",
+      "client.MoodRendererMixin",
+      "client.CustomRolesRoleNameRendererMixin"
+    ],
+	"injectors": {
+      "defaultRequire": 1
+	},
+	"overwrites": {
+      "requireAnnotations": true
+	}
+}

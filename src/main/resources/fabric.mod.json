@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "rat",
+	"version": "${version}",
+	"name": "Roles Among the Train",
+	"description": "Roles Among the Train is a \"The Last Voyage of the Harpy Express\" addon that adds a few new roles.",
+	"authors": [
+		"CalinXD!"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/roles-among-the-train",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/rat/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"dev.cxd.rat.RolesAmongTheTrain"
+		],
+		"client": [
+			"dev.cxd.rat.RolesAmongTheTrainClient"
+		],
+		"fabric-datagen": [
+			"dev.cxd.rat.RolesAmongTheTrainDataGenerator"
+		]
+    },
+	"mixins": [
+		"rat.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.18.1",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
