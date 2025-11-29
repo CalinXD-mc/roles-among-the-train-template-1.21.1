@@ -3,7 +3,8 @@
 	"package": "dev.cxd.rat.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-      "ForceRoleCommandMixin"
+      "ForceRoleCommandMixin",
+      "GameFunctionsMixin"
     ],
     "client": [
     ],

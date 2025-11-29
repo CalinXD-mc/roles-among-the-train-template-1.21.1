@@ -3,6 +3,8 @@ package dev.cxd.rat;
 import dev.cxd.rat.commands.ListRolesCommand;
 import dev.cxd.rat.commands.SetEnabledRoleCommand;
 import dev.cxd.rat.config.RolesAmongTheTrainConfig;
+import dev.cxd.rat.index.RATEffects;
+import dev.cxd.rat.index.RATItems;
 import dev.cxd.rat.modded_murder.ModdedMurderGameMode;
 import dev.cxd.rat.modded_murder.ModdedWeights;
 import dev.doctor4t.trainmurdermystery.api.GameMode;
@@ -12,11 +14,13 @@ import dev.doctor4t.trainmurdermystery.api.TMMRoles;
 import dev.doctor4t.trainmurdermystery.cca.GameWorldComponent;
 import dev.doctor4t.trainmurdermystery.client.gui.RoleAnnouncementTexts;
 import dev.doctor4t.trainmurdermystery.command.ForceRoleCommand;
+import dev.doctor4t.trainmurdermystery.event.AllowPlayerDeath;
 import dev.doctor4t.trainmurdermystery.event.CanSeePoison;
 import dev.doctor4t.trainmurdermystery.game.GameConstants;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.entity.player.PlayerEntity;
+import org.agmas.harpymodloader.events.ModdedRoleAssigned;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 
@@ -41,7 +45,8 @@ public class RolesAmongTheTrain implements ModInitializer {
 
     public static Role TIMEKEEPER = TMMRoles.registerRole(new Role(id("time_keeper"), 0x0026FF, true, false, Role.MoodType.REAL, GameConstants.getInTicks(0, 10), true));
     public static Role APATHETIC = TMMRoles.registerRole(new Role(id("apathetic"), 0xC0C0C0, true, false, Role.MoodType.NONE, GameConstants.getInTicks(0, 10), false));
-    public static Role TOXICOLOGIST = TMMRoles.registerRole(new Role(id("toxicologist"), 0xB8295A, true, false, Role.MoodType.NONE, GameConstants.getInTicks(0, 10), false));
+    public static Role TOXICOLOGIST = TMMRoles.registerRole(new Role(id("toxicologist"), 0xB8295A, true, false, Role.MoodType.REAL, GameConstants.getInTicks(0, 10), false));
+    public static Role DOCTOR = TMMRoles.registerRole(new Role(id("doctor"), 0xC5AE8B, true, false, Role.MoodType.REAL, GameConstants.getInTicks(0, 10), false));
 
     public static @NotNull Identifier id(String name) {
         return Identifier.of(MOD_ID, name);
@@ -49,6 +54,8 @@ public class RolesAmongTheTrain implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        RATItems.initialize();
+        RATEffects.initialize();
 
         RolesAmongTheTrainConfig.HANDLER.save();
         RolesAmongTheTrainConfig.HANDLER.load();
@@ -69,6 +76,7 @@ public class RolesAmongTheTrain implements ModInitializer {
         ModdedWeights.init();
 
         registerCommands();
+        registerEvents();
 
         MODDED_GAMEMODE = TMMGameModes.registerGameMode(Identifier.of(MOD_ID, "modded"), new ModdedMurderGameMode(Identifier.of(MOD_ID, "modded")));
         refreshRoles();
@@ -76,6 +84,23 @@ public class RolesAmongTheTrain implements ModInitializer {
         setRoleMaximum(TIMEKEEPER, 1);
         setRoleMaximum(APATHETIC, 1);
         setRoleMaximum(TOXICOLOGIST, 1);
+        setRoleMaximum(DOCTOR, 1);
+    }
+
+    private void registerEvents() {
+        ModdedRoleAssigned.EVENT.register((player, role) -> {
+            if (role.equals(DOCTOR)) {
+                player.giveItemStack(RATItems.MEDKIT.getDefaultStack());
+            }
+        });
+
+        AllowPlayerDeath.EVENT.register((player, deathReason) -> {
+            if (player.hasStatusEffect(RATEffects.PROTECTED)) {
+                player.clearStatusEffects();
+                return false;
+            }
+            return true;
+        });
 
         CanSeePoison.EVENT.register((player)->{
             GameWorldComponent gameWorldComponent = (GameWorldComponent) GameWorldComponent.KEY.get(player.getWorld());

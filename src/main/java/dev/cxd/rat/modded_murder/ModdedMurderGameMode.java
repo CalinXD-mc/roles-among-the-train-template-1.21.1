@@ -2,7 +2,8 @@ package dev.cxd.rat.modded_murder;
 
 import dev.cxd.rat.RolesAmongTheTrain;
 import dev.cxd.rat.config.RolesAmongTheTrainConfig;
-import dev.cxd.rat.events.ModdedRoleAssigned;
+//import dev.cxd.rat.events.ModdedRoleAssigned;
+import org.agmas.harpymodloader.events.ModdedRoleAssigned;
 import dev.doctor4t.trainmurdermystery.api.Role;
 import dev.doctor4t.trainmurdermystery.api.TMMRoles;
 import dev.doctor4t.trainmurdermystery.cca.GameWorldComponent;
