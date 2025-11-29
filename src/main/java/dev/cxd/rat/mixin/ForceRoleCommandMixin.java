@@ -79,5 +79,25 @@ public class ForceRoleCommandMixin {
                         )
                 )
         );
+
+        // doctor
+        dispatcher.register(CommandManager.literal("tmm:forceRole")
+                .requires(source -> source.hasPermissionLevel(2))
+                .then(CommandManager.literal("doctor")
+                        .then(CommandManager.argument("players", EntityArgumentType.players())
+                                .executes(context -> {
+                                    Collection<ServerPlayerEntity> players = EntityArgumentType.getPlayers(context, "players");
+                                    for (ServerPlayerEntity player : players) {
+                                        RolesAmongTheTrain.addToForcedRoles(RolesAmongTheTrain.DOCTOR, player);
+                                    }
+                                    context.getSource().sendFeedback(
+                                            () -> Text.literal("Forced " + players.size() + " player(s) to be Doctor"),
+                                            true
+                                    );
+                                    return 1;
+                                })
+                        )
+                )
+        );
     }
 }
