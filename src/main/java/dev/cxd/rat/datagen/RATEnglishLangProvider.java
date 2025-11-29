@@ -36,9 +36,9 @@ public class RATEnglishLangProvider extends FabricLanguageProvider {
         tb.add("announcement.win.toxicologist", "Passagers Win!");
 
         // Announcements – Doctor
-        tb.add("announcement.goals.toxicologist", "You get a Medkit that can save someone's life.");
-        tb.add("announcement.role.toxicologist", "Doctor");
-        tb.add("announcement.win.toxicologist", "Passagers Win!");
+        tb.add("announcement.goals.doctor", "You get a Medkit that can save someone's life.");
+        tb.add("announcement.role.doctor", "Doctor");
+        tb.add("announcement.win.doctor", "Passagers Win!");
 
         // Commands – setenabledrole
         tb.add("commands.setenabledrole.unchanged", "Nothing changed");
